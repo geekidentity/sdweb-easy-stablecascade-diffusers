@@ -38,7 +38,7 @@ def create_infotext(prompt, negative_prompt, guidence_scale, prior_steps, decode
 
 def predict(prompt, negative_prompt, width, height, guidance_scale, prior_steps, decoder_steps, seed, batch_size):
     device = "cuda"
-    prior = StableCascadePriorPipeline.from_pretrained("stabilityai/stable-cascade-prior", torch_dtype=torch.bfloat16).to(device)
+    prior = StableCascadePriorPipeline.from_pretrained("/stable-diffusion-webui/models/StableCascade/stable-cascade-prior", torch_dtype=torch.bfloat16).to(device)
 
     fixed_seed = get_fixed_seed(seed)
     prior_output = prior(
@@ -55,7 +55,7 @@ def predict(prompt, negative_prompt, width, height, guidance_scale, prior_steps,
     gc.collect()
     torch.cuda.empty_cache()
 
-    decoder = StableCascadeDecoderPipeline.from_pretrained("stabilityai/stable-cascade",  torch_dtype=torch.float16).to(device)
+    decoder = StableCascadeDecoderPipeline.from_pretrained("/stable-diffusion-webui/models/StableCascade/stable-cascade",  torch_dtype=torch.float16).to(device)
     decoder_output = decoder(
         image_embeddings=prior_output.image_embeddings.half(),
         prompt=prompt,

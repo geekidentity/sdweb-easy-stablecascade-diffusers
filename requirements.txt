@@ -1,1 +1,1 @@
-diffusers @ git+https://github.com/kashif/diffusers.git@wuerstchen-v3
+diffusers @ git+https://github.com/kashif/diffusers.git@a3dc21385b7386beb3dab3a9845962ede6765887
